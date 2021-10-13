@@ -40,9 +40,15 @@ const HeadSection = (props: any) => {
     <View style={Styles.head}>
       <Text style={Styles.name}>{item.name}</Text>
       <Text style={Styles.id}>#{("000" + item.id).substr(-3)}</Text>
-      {item.types.map((type: any, key: number) => {
-        return <Type key={key} type={type.type} />;
-      })}
+      <View
+        style={{
+          flexDirection: "row",
+        }}
+      >
+        {item.types.map((type: any, key: number) => {
+          return <Type key={key} type={type.type} />;
+        })}
+      </View>
     </View>
   );
 };
@@ -119,6 +125,7 @@ const Styles = StyleSheet.create({
     paddingVertical: 2,
     marginBottom: 5,
     alignSelf: "flex-start",
+    marginRight: 10,
   },
   typeName: {
     textTransform: "capitalize",
@@ -128,7 +135,6 @@ const Styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-    marginTop: -50,
   },
   image: {
     height: imageWidth,
