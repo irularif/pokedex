@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { setDetail } from "../../store/actions";
 import getColorType from "../../utils/colors";
 const { width } = Dimensions.get("window");
 const wrapperWidth = (width - 30) / 2;
@@ -15,13 +17,14 @@ const imageWidth = wrapperWidth / 2;
 
 const Item = (props: any) => {
   const nav = useNavigation();
-  const { item, actions } = props;
+  const dispatch = useDispatch();
+  const { item } = props;
   const imgSource = {
     uri: item.sprites.other["official-artwork"].front_default,
   };
   const bgColor = getColorType(item.types.map((type: any) => type.type.name));
   const onPress = () => {
-    actions.setDetail(item.id);
+    dispatch(setDetail(item.id));
     nav.navigate("Detail" as never);
   };
 

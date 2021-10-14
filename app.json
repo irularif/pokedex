@@ -28,6 +28,9 @@
     },
     "androidStatusBar": {
       "translucent": false
+    },
+    "extra": {
+      "api": "https://pokeapi.co/api/v2/"
     }
   }
 }

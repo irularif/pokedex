@@ -1,9 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as Actions from "../../store/actions";
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 import About from "./About";
 import Header from "./Header";
 import Stats from "./Stats";
@@ -11,7 +9,7 @@ import Stats from "./Stats";
 const Tab = createMaterialTopTabNavigator();
 
 const Detail = (props: any) => {
-  const { detail } = props;
+  const { detail } = useSelector((state: any) => state.pokemons);
 
   return (
     <SafeAreaView style={Styles.safeArea}>
@@ -48,15 +46,5 @@ const Styles = StyleSheet.create({
     flex: 1,
   },
 });
-const mapStateToProps = (state: any) => ({
-  items: state.pokemons.items,
-  page: state.pokemons.page,
-  limit: state.pokemons.limit,
-  detail: state.pokemons.detail,
-});
 
-const mapDispatchToProps = (dispatch: any) => ({
-  actions: bindActionCreators(Actions, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Detail);
+export default Detail;

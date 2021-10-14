@@ -1,12 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as Actions from "../../store/actions";
 import { ProgressBar } from "react-native-paper";
+import { useSelector } from "react-redux";
 
 const Stats = (props: any) => {
-  const { detail } = props;
+  const { detail } = useSelector((state: any) => state.pokemons);
 
   return (
     <View
@@ -36,7 +34,7 @@ const SectionA = (props: any) => {
               progress={progress}
               color={progress > 0.5 ? "green" : "red"}
               style={{
-                width: "100%",
+                width: 150,
               }}
             />
           </View>
@@ -53,17 +51,15 @@ const Styles = StyleSheet.create({
     flexGrow: 1,
   },
   saFrame: {
+    display: "flex",
     flexDirection: "row",
-    padding: 15,
-    justifyContent: "space-between",
+    marginBottom: 5,
     alignItems: "center",
     flex: 1,
-    overflow: "hidden",
   },
   saFrameItem: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
   },
   saFrameItemTitle: {
     textTransform: "capitalize",
@@ -75,15 +71,4 @@ const Styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state: any) => ({
-  items: state.pokemons.items,
-  page: state.pokemons.page,
-  limit: state.pokemons.limit,
-  detail: state.pokemons.detail,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  actions: bindActionCreators(Actions, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Stats);
+export default Stats;

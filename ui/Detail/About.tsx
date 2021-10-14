@@ -1,11 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as Actions from "../../store/actions";
+import { useSelector } from "react-redux";
 
 const About = (props: any) => {
-  const { detail } = props;
+  const { detail } = useSelector((state: any) => state.pokemons);
 
   return (
     <View
@@ -71,15 +69,4 @@ const Styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state: any) => ({
-  items: state.pokemons.items,
-  page: state.pokemons.page,
-  limit: state.pokemons.limit,
-  detail: state.pokemons.detail,
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-  actions: bindActionCreators(Actions, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default About;

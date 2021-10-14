@@ -7,26 +7,22 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { connect } from "react-redux";
-import * as Actions from "../../store/actions";
-import { bindActionCreators } from "redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getList, setList } from "../../store/actions";
+import pokemonApi from "../../store/api/pokemonApi";
 import Header from "./Header";
 import Item from "./Item";
-import pokemonApi from "../../store/api/pokemonApi";
 
 const Home = (props: any) => {
-  const { items, actions, page, limit } = props;
+  const { items, page, limit } = useSelector((state: any) => state.pokemons);
+  const dispatch = useDispatch();
 
-  const getList = async () => {
-    let npage = page + 1;
-    let offset = npage * limit;
-    const newItems = await pokemonApi.getList(limit, offset);
-    items.push(...newItems);
-    actions.setList(items, npage);
+  const fetchData = () => {
+    dispatch(getList(page, limit));
   };
 
   useEffect(() => {
-    getList();
+    fetchData();
   }, []);
 
   return (
@@ -36,10 +32,10 @@ const Home = (props: any) => {
         <View style={Styles.content}>
           {Array.isArray(items) &&
             items.map((item, key) => {
-              return <Item key={key} item={item} actions={actions} />;
+              return <Item key={key} item={item} />;
             })}
         </View>
-        <TouchableOpacity style={Styles.button} onPress={getList}>
+        <TouchableOpacity style={Styles.button} onPress={fetchData}>
           <Text>Show more</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -71,14 +67,5 @@ const Styles = StyleSheet.create({
     margin: 15,
   },
 });
-const mapStateToProps = (state: any) => ({
-  items: state.pokemons.items,
-  page: state.pokemons.page,
-  limit: state.pokemons.limit,
-});
 
-const mapDispatchToProps = (dispatch: any) => ({
-  actions: bindActionCreators(Actions, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

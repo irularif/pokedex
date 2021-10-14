@@ -3,7 +3,7 @@ import api from "../../utils/api";
 const getList = async (limit: number, offset: number) => {
   const res = await api({
     method: "GET",
-    url: `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
+    url: `pokemon?limit=${limit}&offset=${offset}`,
   });
 
   if (Array.isArray(res.results)) {
@@ -31,7 +31,7 @@ const getDetail = async (url: string) => {
 const getCharacter = async (id: number) => {
   const res = await api({
     method: "GET",
-    url: `https://pokeapi.co/api/v2/characteristic/${id}/`,
+    url: `characteristic/${id}/`,
   });
 
   if (!!res?.id) {
