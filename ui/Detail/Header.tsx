@@ -40,11 +40,7 @@ const HeadSection = (props: any) => {
     <View style={Styles.head}>
       <Text style={Styles.name}>{item.name}</Text>
       <Text style={Styles.id}>#{("000" + item.id).substr(-3)}</Text>
-      <View
-        style={{
-          flexDirection: "row",
-        }}
-      >
+      <View style={Styles.headType}>
         {item.types.map((type: any, key: number) => {
           return <Type key={key} type={type.type} />;
         })}
@@ -117,6 +113,9 @@ const Styles = StyleSheet.create({
     color: "#fff",
     textAlign: "right",
     fontSize: 16,
+  },
+  headType: {
+    flexDirection: "row",
   },
   typeWrapper: {
     backgroundColor: "#ffffff40",

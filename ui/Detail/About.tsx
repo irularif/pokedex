@@ -6,11 +6,7 @@ const About = (props: any) => {
   const { detail } = useSelector((state: any) => state.pokemons);
 
   return (
-    <View
-      style={{
-        backgroundColor: "#fff",
-      }}
-    >
+    <View style={Styles.about}>
       <SectionA item={detail} />
     </View>
   );
@@ -42,6 +38,9 @@ const SectionA = (props: any) => {
 };
 
 const Styles = StyleSheet.create({
+  about: {
+    backgroundColor: "#fff",
+  },
   sectionA: {
     padding: 20,
   },

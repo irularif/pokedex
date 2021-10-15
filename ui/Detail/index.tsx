@@ -14,13 +14,8 @@ const Detail = (props: any) => {
   return (
     <SafeAreaView style={Styles.safeArea}>
       <ScrollView
-        style={{
-          display: "flex",
-        }}
-        contentContainerStyle={{
-          display: "flex",
-          flexGrow: 1,
-        }}
+        style={Styles.scrollArea}
+        contentContainerStyle={Styles.scrollAreaContent}
       >
         <Header item={detail} />
         <Tab.Navigator
@@ -41,6 +36,13 @@ const Detail = (props: any) => {
 };
 
 const Styles = StyleSheet.create({
+  scrollArea: {
+    display: "flex",
+  },
+  scrollAreaContent: {
+    display: "flex",
+    flexGrow: 1,
+  },
   safeArea: {
     display: "flex",
     flex: 1,

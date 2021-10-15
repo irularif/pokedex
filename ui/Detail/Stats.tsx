@@ -7,12 +7,7 @@ const Stats = (props: any) => {
   const { detail } = useSelector((state: any) => state.pokemons);
 
   return (
-    <View
-      style={{
-        backgroundColor: "#fff",
-        flexGrow: 1,
-      }}
-    >
+    <View style={Styles.stat}>
       <SectionA item={detail} />
     </View>
   );
@@ -45,6 +40,10 @@ const SectionA = (props: any) => {
 };
 
 const Styles = StyleSheet.create({
+  stat: {
+    backgroundColor: "#fff",
+    flexGrow: 1,
+  },
   sectionA: {
     padding: 20,
     display: "flex",
